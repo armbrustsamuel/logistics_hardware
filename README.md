@@ -7,13 +7,38 @@ Embedded telemetry application, to collect and upload vehicles hardware informat
 To run the application on you Raspeberry Pi you need to...
 
 ###Install Raspbian
-TODO
+
+To install the Rasbian OS on your SD card, you can follow these [instructions](https://www.raspberrypi.org/documentation/installation/installing-images/).
+
 
 ###Install Peripheral Hardware
 TODO
 
 ###Install Node.js
-TODO
+
+The Node.js installation can be done with sudo permissions through the package manager following these commands:
+
+```sh
+sudo apt-get update
+sudo apt-get install nodejs
+sudo apt-get install npm
+```
+
+To allow compatibility with legacy packages, the nodejs must be execute by **node** and **nodejs**.
+The installation of nodejs-legacy will allow this.
+
+```sh
+sudo apt-get install nodejs-legacy
+```
+
+You can now check the version of installed applications.
+I should now just received the version as result without any error.
+
+```sh
+node -v
+nodejs -v
+npm -v
+```
 
 ###Clone Repository
 
