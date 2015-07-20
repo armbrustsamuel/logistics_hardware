@@ -12,7 +12,7 @@ To install the Rasbian OS on your SD card, you can follow these [instructions](h
 
 
 ###Install Peripheral Hardware
-TODO
+![Connection Scheme](scheme_bb.png)
 
 ###Install Node.js
 
