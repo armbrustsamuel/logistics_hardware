@@ -6,9 +6,7 @@ var data = {
 }
 
 //Constructor
-function Accelerometer(board) {
-
-
+function OBD2(board) {
   //Exposes sesnor data as properties
   Object.defineProperties(this, {
     data: {
@@ -19,5 +17,5 @@ function Accelerometer(board) {
   });
 }
 
-util.inherits(Accelerometer, events.EventEmitter);
-module.exports = Accelerometer;
+util.inherits(OBD2, events.EventEmitter);
+module.exports = OBD2;

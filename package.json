@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/armbrustsamuel/logistics_hardware",
   "dependencies": {
+    "getmac": "^1.0.7",
     "johnny-five": "^0.8.85"
   }
 }
