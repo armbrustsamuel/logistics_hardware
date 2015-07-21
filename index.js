@@ -7,6 +7,9 @@ var Accelerometer = require("./accelerometer");
 var GPS = require("./gps");
 var OBD2 = require("./obd2");
 
+var backend_host = 'requestb.in';
+var backend_path = '/1de4md11';
+
 //Flag to indicate if cache file is being sent
 var isUploading = false;
 
@@ -171,7 +174,6 @@ function uploadData() {
         var json = '[' + file.substring(0, file.length - 2) + ']';
         //Parse it to JSON array
         json = JSON.parse(json);
-        console.log(json);
     }
 
     //Sends the data
@@ -186,8 +188,37 @@ function uploadData() {
 }
 
 function send_data(data, callback) {
-    console.log("Sending....");
-    //Simulates the sending adding a delay
-    //TODO
-    setTimeout(callback, 3000);
+    //Converts the data to be sent to string
+    data = JSON.stringify(data);
+    console.log("Sending", data.length, 'bytes...');
+
+    //Set the sending options
+    var post_options = {
+        host: backend_host,
+        port: '80',
+        path: backend_path,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': data.length
+        }
+    };
+
+    // Set the request
+    var http = require("http");
+    var post_req = http.request(post_options, function(res) {
+        console.log('Status: ' + res.statusCode);
+        res.on('data', function(body) {
+            console.log('Upload done :' + body);
+            callback();
+        });
+        post_req.on('error', function(e) {
+            console.log('Upload failed: ' + e.message);
+            callback();
+        }); 
+    });
+
+    //Post the data
+    post_req.write(data);
+    post_req.end();
 }
