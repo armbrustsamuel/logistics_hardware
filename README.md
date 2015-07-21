@@ -2,6 +2,9 @@
 
 [![Join the chat at https://gitter.im/armbrustsamuel/logistics_hardware](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/armbrustsamuel/logistics_hardware?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+[![Join SAP JAM Group](https://img.shields.io/badge/SAP_JAM-Join-blue.svg?style=flat)](https://jam4.sapjam.com/groups/YY7skDYos93atGxqo6W8ZS/content?folder_id=OL1EEbH5syzdyhzykqnuHv)
+
+
 Embedded telemetry application, to collect and upload vehicles hardware information to SAP HANA data analysis server.
 
 ##How to run
@@ -14,46 +17,47 @@ To install the Rasbian OS on your SD card, you can follow these [instructions](h
 
 
 ###Install Peripheral Hardware
-TODO
+![Connection Scheme](scheme_bb.png)
 
 ###Install Node.js
 
-The Node.js installation can be done with sudo permissions through the package manager following these commands:
+The Node.js can be installed using the build of [node-arm](http://node-arm.herokuapp.com/).
+To avoid incompatibility errors, we will use a more stable version instead of the latest.
 
 ```sh
 sudo apt-get update
-sudo apt-get install nodejs
-sudo apt-get install npm
-```
-
-To allow compatibility with legacy packages, the nodejs must be execute by **node** and **nodejs**.
-The installation of nodejs-legacy will allow this.
-
-```sh
-sudo apt-get install nodejs-legacy
-```
-
-You can now check the version of installed applications.
-I should now just received the version as result without any error.
-
-```sh
+wget http://node-arm.herokuapp.com/node_0.10.36_armhf.deb
+sudo dpkg -i node_0.10.36_armhf.deb
+# Check installation
 node -v
-nodejs -v
+```
+The NPM installation can be done using the package manager, but it need to be updated.
+
+````sh
+sudo apt-get install npm
+sudo npm install npm -g
 npm -v
 ```
 
 ###Clone Repository
 
 To clone the repository from github on raspberry shell execute:
+
 ```sh
-git clone https://github.com/armbrustsamuel/logistics_hardware.git
+git clone https://github.com/armbrustsamuel/logistics_hardware.git && cd logistics_hardware
 ```
 
-###Run the application
+###Build and run the application
 
-Once you have the application source on your local machine, enter on the folder and run it through npm script:
+Once you have the application source on your local machine, you need to build it for a first time to download all npm dependencies.
+The --unsafe-perm is necessary to properly install the serialport package.
 
 ```sh
-cd logistics_hardware
+npm install --unsafe-perm
+```
+
+To run the application, use npm start.
+
+```sh
 npm start
 ```

@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/armbrustsamuel/logistics_hardware/issues"
   },
-  "homepage": "https://github.com/armbrustsamuel/logistics_hardware"
+  "homepage": "https://github.com/armbrustsamuel/logistics_hardware",
+  "dependencies": {
+    "getmac": "^1.0.7",
+    "johnny-five": "^0.8.85"
+  }
 }
