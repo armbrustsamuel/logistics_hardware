@@ -1,5 +1,8 @@
 # Innoweek 2015 - Logistics Team (Hardware Application)
 
+[![Join the chat at https://gitter.im/armbrustsamuel/logistics_hardware](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/armbrustsamuel/logistics_hardware?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join SAP JAM Group](https://img.shields.io/badge/SAP_JAM-Join-blue.svg?style=flat)](https://jam4.sapjam.com/groups/YY7skDYos93atGxqo6W8ZS/content?folder_id=OL1EEbH5syzdyhzykqnuHv)
+
 Embedded telemetry application, to collect and upload vehicles hardware information to SAP HANA data analysis server.
 
 ##How to run
