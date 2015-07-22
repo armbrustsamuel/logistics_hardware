@@ -28,3 +28,6 @@ node_modules
 
 # Application stored cache file
 cache.tmp
+# Temporary files
+send.json
+send.zip

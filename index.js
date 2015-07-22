@@ -1,3 +1,5 @@
+var fs = require("fs");
+var zlib = require('zlib');
 var five = require("johnny-five");
 var getmac = require('getmac');
 var endOfLine = require('os').EOL;
@@ -7,14 +9,19 @@ var Accelerometer = require("./accelerometer");
 var GPS = require("./gps");
 var OBD2 = require("./obd2");
 
-var backend_host = 'requestb.in';
-var backend_path = '/1de4md11';
+//Backend Upload data URL
+//TODO: Replace by the real one
+var backend_url = 'http://requestb.in/1de4md11';
 
 //Flag to indicate if cache file is being sent
 var isUploading = false;
 
 //Cache file path
 var cacheFilePath = './cache.tmp';
+//Sending data file path
+var sendingFilePath = './send.json'
+    //Zipped version of Sending file path
+var zippedFilePath = './send.zip'
 
 //Sensor data collection interval in ms
 var sensor_collection_interval = 1000.
@@ -142,7 +149,7 @@ function append_data_cache_file(callback) {
 
         var json = JSON.stringify(cachedData);
         //Append the new line at the end of file followed by ',' to later encapusulate it as JSON array
-        json = json.substring(1, json.length - 1) + ',\n';
+        json = json.substring(1, json.length - 1) + ',' + endOfLine;
         var fs = require('fs');
         fs.appendFileSync(cacheFilePath, json);
 
@@ -192,33 +199,30 @@ function send_data(data, callback) {
     data = JSON.stringify(data);
     console.log("Sending", data.length, 'bytes...');
 
-    //Set the sending options
-    var post_options = {
-        host: backend_host,
-        port: '80',
-        path: backend_path,
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Content-Length': data.length
-        }
-    };
+    //Save it as a file to be sent
+    fs.writeFileSync(sendingFilePath, data);
 
-    // Set the request
-    var http = require("http");
-    var post_req = http.request(post_options, function(res) {
-        console.log('Status: ' + res.statusCode);
-        res.on('data', function(body) {
-            console.log('Upload done :' + body);
-            callback();
+    //Zip the data file as another file
+    var json_file = fs.createReadStream(sendingFilePath);
+    var zip_file = fs.createWriteStream(zippedFilePath);
+    json_file.pipe(zlib.createGzip()).pipe(zip_file).on('finish', function() {
+
+        //When zip is finished
+        //Creates a POST request to the backend URL
+        var request = require('request');
+        var req = request.post(backend_url, function(err, resp, body) {
+            if (err) {
+                console.log('Backend POST error: ' + err.message);
+                callback();
+            }
+            else {
+                console.log('Backend answers: ' + body);
+                callback();
+            }
         });
-        post_req.on('error', function(e) {
-            console.log('Upload failed: ' + e.message);
-            callback();
-        }); 
-    });
 
-    //Post the data
-    post_req.write(data);
-    post_req.end();
+        //Sends the zipped file as form attachment
+        var form = req.form();
+        form.append(zippedFilePath, fs.createReadStream(zippedFilePath));
+    });
 }
