@@ -2,6 +2,7 @@ var events = require("events"),
   util = require("util");
 
 var currentDate = new Date();
+var interval = 3000;
 
 //Initializing OBD
 var OBDReader = require('bluetooth-obd');
@@ -9,7 +10,7 @@ var btOBDReader = new OBDReader();
 
 //Sensors data structure
 var data = {
-	Id: '',
+	id: '',
 	engineRPM: '',
 	speed: '',
 	fuelLevel: '',
@@ -33,7 +34,7 @@ btOBDReader.on('connected', function () {
 	this.addPoller("vss");
 	this.addPoller("rpm");
 	this.addPoller("temp");
-	this.startPolling(3000);
+	this.startPolling(interval);
 });
 
 //Error handling
