@@ -10,8 +10,6 @@ var GPS = require("./gps");
 var OBD2 = require("./obd2");
 
 //Backend Upload data URL
-//TODO: Replace by the real one
-//var backend_url = 'http://requestb.in/15ef7j91';
 var backend_url = 'https://logisticswebappi843655trial.hanatrial.ondemand.com/LogisticsWebApp/InsertTripData';
 
 //Flag to indicate if cache file is being sent
@@ -64,16 +62,16 @@ getmac.getMac(function(err, macAddress) {
     //Once haveing the Id, waits for the commuication with Arduino Board
     //gets ready
     console.log("Waiting Arduino board commuication link to get ready...");
-    //  board.on("ready", function() {
-    console.log("Communication link with Arduino ready!");
-    //Initialize sensors configuration
-    initializeSensors(function() {
-        //Collect sensors information
-        collectSensors();
-        //Uploads sensors data to main server
-        uploadData();
+    board.on("ready", function() {
+        console.log("Communication link with Arduino ready!");
+        //Initialize sensors configuration
+        initializeSensors(function() {
+            //Collect sensors information
+            collectSensors();
+            //Uploads sensors data to main server
+            uploadData();
+        });
     });
-    //  });
 });
 
 function initializeSensors(callback) {
@@ -196,18 +194,16 @@ function uploadData() {
 }
 
 function send_data(data, callback) {
-    console.log("Sending data to remote server...");
+    //Converts the data to be sent to string
+    data = JSON.stringify(data);
+    console.log("Sending", data.length, 'bytes...');
+
+    //Save it as a file to be sent
+    fs.writeFileSync(sendingFilePath, data);
 
     //Creates a POST request to the backend URL
     var request = require('request');
-    var options = {
-        uri: backend_url,
-        method: 'POST',
-        json: data,
-        timeout: 5000
-    };
-
-    request(options, function(err, resp, body) {
+    var req = request.post(backend_url, function(err, resp, body) {
         if (err) {
             console.log('Backend POST error: ' + err.message);
             callback();
@@ -218,4 +214,7 @@ function send_data(data, callback) {
         }
     });
 
+    //Sends the file as form attachment
+    var form = req.form();
+    form.append(sendingFilePath, fs.createReadStream(sendingFilePath));
 }
