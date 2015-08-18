@@ -11,6 +11,8 @@
 #define SPD_CODE "010D"
 #define LOAD 4
 #define LOAD_CODE "0104"
+#define DIST 5
+#define DIST_CODE "1031"
 
 SoftwareSerial blueToothSerial(RxD,TxD); 
 boolean prompt = false;
@@ -36,7 +38,7 @@ void setup(){
   pinMode(TxD, OUTPUT);
 
   record = false;
-  send_OBD_cmd("ATZ");              // send to OBD ATZ, reset
+  // send_OBD_cmd("ATZ");              // send to OBD ATZ, reset
   send_OBD_cmd("ATE0");             // ECHO OFF (Para o OBDII não devolver os mesmos comandos enviados)
     
 }
@@ -74,6 +76,7 @@ void loop(){
     send_OBD_cmd(TEMP_CODE);
     send_OBD_cmd(SPD_CODE);
     send_OBD_cmd(LOAD_CODE);
+    send_OBD_cmd(DIST_CODE);
   }    
   
 /*
