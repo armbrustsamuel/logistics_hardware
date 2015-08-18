@@ -12,7 +12,7 @@
 #define LOAD 4
 #define LOAD_CODE "0104"
 #define DIST 5
-#define DIST_CODE "1031"
+#define DIST_CODE "0131"
 
 SoftwareSerial blueToothSerial(RxD,TxD); 
 boolean prompt = false;

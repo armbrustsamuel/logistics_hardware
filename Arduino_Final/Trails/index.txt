@@ -1,0 +1,11 @@
+File				Trail
+2015_08_11_19_27_44.txt		Unisinos -> Home -> SL Downtown -> regular
+2015_08_17_17_57_09.txt		Unisinos -> Home -> SL Downtown -> detour
+
+\*
+ * New Layout
+ * It was added a new OBD information, so instead of 4 columns OBD is informing 5.
+ * The just new informed column regards to the PID 31 - the collected information
+ * is a try to get the distance traveled.
+\*
+2015_08_18_08_51_46.txt		Home -> Unisinos -> BR116 -> regular
