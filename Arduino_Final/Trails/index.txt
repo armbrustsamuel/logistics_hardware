@@ -9,3 +9,5 @@ File				Trail
  * is a try to get the distance traveled.
 \*
 2015_08_18_08_51_46.txt		Home -> Unisinos -> BR116 -> regular
+2015_08_18_18_16_20.txt		Unisinos -> Stop -> SL Downtown -> detour 1/2
+2015_08_18_19_16_07.txt		Stop -> Home -> Bourbon NH -> detour 2/2
