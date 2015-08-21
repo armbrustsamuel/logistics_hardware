@@ -1,5 +1,5 @@
 File				Trail
-2015_08_11_19_27_44.txt		Unisinos -> Home -> SL Downtown -> regular
+2015_08_11_19_27_44.txt		Unisinos -> Home -> SL Downtown -> standard
 2015_08_17_17_57_09.txt		Unisinos -> Home -> SL Downtown -> detour
 
 \*
@@ -8,6 +8,9 @@ File				Trail
  * The just new informed column regards to the PID 31 - the collected information
  * is a try to get the distance traveled.
 \*
-2015_08_18_08_51_46.txt		Home -> Unisinos -> BR116 -> regular
+2015_08_18_08_51_46.txt		Home -> Unisinos -> BR116 -> standard
 2015_08_18_18_16_20.txt		Unisinos -> Stop -> SL Downtown -> detour 1/2
 2015_08_18_19_16_07.txt		Stop -> Home -> Bourbon NH -> detour 2/2
+2015_08_19_18_13_33.txt		Unisinos -> Home -> SL Downtown - standard
+2015_08_20_08_46_48.txt		Home -> Unisinos -> BR116 -> regular
+2015_08_20_18_25_46.txt		Unisinos -> Home -> SL Downtown detour/stop
