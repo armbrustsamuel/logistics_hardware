@@ -13,8 +13,6 @@
 #define LOAD_CODE "0104"
 #define DIST 5
 #define DIST_CODE "0131"
-#define FUEL 5
-#define FUEL_CODE "012F"
 
 SoftwareSerial blueToothSerial(RxD,TxD); 
 boolean prompt = false;
@@ -79,7 +77,6 @@ void loop(){
     send_OBD_cmd(SPD_CODE);
     send_OBD_cmd(LOAD_CODE);
     send_OBD_cmd(DIST_CODE);
-    send_OBD_cmd(FUEL_CODE);
   }    
   
 /*
